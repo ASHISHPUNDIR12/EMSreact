@@ -8,7 +8,7 @@ const AdminDashbaord = () => {
     <div className="min-h-screen bg-gray-100">
       <Header />
       <CreateTask/>
-      <AllTask/>
+      <AllTask  />
     </div>
   );
 };
