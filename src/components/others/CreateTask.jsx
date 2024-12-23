@@ -11,31 +11,36 @@ const CreateTask = () => {
   const [asignTo, setAsignTo] = useState('')
   const [category, setCategory] = useState('')
 
-  const [newTask, setNewTask] = useState({})
+  // const [newTask, setNewTask] = useState({})
 
   const submitHandler = (e) => {
-      e.preventDefault()
-
-      setNewTask({ taskTitle, taskDescription, taskDate, category, active: false, newTask: true, failed: false, completed: false })
-
-      const data = userData;
-
-      data.forEach(function (elem) {
-          if (asignTo == elem.firstName) {
-              elem.tasks.push(newTask)
-              elem.taskCounts.newTask = elem.taskCounts.newTask + 1;
-          }
-      });
-      setUserData(data)
-      console.log(data);
-
-      setTaskTitle('')
-      setCategory('')
-      setAsignTo('')
-      setTaskDate('')
-      setTaskDescription('')
-      };
+    e.preventDefault();
   
+    const newTask = { taskTitle, taskDescription, taskDate, category, active: false, newTask: true, failed: false, completed: false };
+  
+    const updatedUserData = userData.map((user) => {
+      if (user.firstName === asignTo) {
+        return {
+          ...user,
+          tasks: [...user.tasks, newTask],
+          taskCounts: {
+            ...user.taskCounts,
+            newTask: user.taskCounts.newTask + 1,
+          },
+        };
+      }
+      return user;
+    });
+  
+    setUserData(updatedUserData);
+    console.log(updatedUserData);
+  
+    setTaskTitle('');
+    setCategory('');
+    setAsignTo('');
+    setTaskDate('');
+    setTaskDescription('');
+  };
 
   return (
     <div className="max-w-4xl mx-auto py-8">

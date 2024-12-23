@@ -45,7 +45,7 @@ const Login = ({ handleLogin }) => {
             className="bg-blue-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-600 transition duration-300"
             type="submit"
           >
-            Submit
+            Login
           </button>
         </form>
       </div>

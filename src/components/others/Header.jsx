@@ -1,9 +1,10 @@
 import React from "react";
 
-const Header = () => {
+const Header = (props) => {
   const UserLogOut = () => {
     localStorage.setItem("loggedInUser", "");
-    window.location.reload();
+    props.changeUser('')
+    // window.location.reload();
   };
   return (
     <div className="bg-blue-500 text-white p-4 flex items-center justify-between shadow-md w-full max-w-full mx-auto">

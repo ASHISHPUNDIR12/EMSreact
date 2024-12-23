@@ -46,14 +46,9 @@ const App = () => {
 
   return (
     <>
-      {user === null ? (
-        <Login handleLogin={handleLogin} />
-      ) : user === "admin" ? (
-        <AdminDashbaord />
-      ) : (
-        <EmployeeDashboard data={LoginUserData} />
-      )}
-    </>
+    {!user ? <Login handleLogin={handleLogin} /> : ''}
+    {user == 'admin' ? <AdminDashbaord changeUser={setUser} /> : (user == 'employee' ? <EmployeeDashboard changeUser={setUser} data={LoginUserData} /> : null) }
+  </>
   );
 };
 export default App;
