@@ -12,39 +12,39 @@ const CreateTask = () => {
   const [category, setCategory] = useState('')
 
   const [newTask, setNewTask] = useState({})
-   
-  const sumbitHandler = (e)=>{
-    e.preventDefault();
-    
-    setNewTask({ taskTitle, taskDescription, taskDate, category, active: false, newTask: true, failed: false, completed: false })
 
-    const data = userData
+  const submitHandler = (e) => {
+      e.preventDefault()
 
-    data.forEach(function (elem) {
-        if (asignTo == elem.firstName) {
-            elem.tasks.push(newTask)
-            console.log(elem)
-            elem.taskCounts.newTask = elem.taskCounts.newTask + 1
-        }
-    })
-    setUserData(data)
+      setNewTask({ taskTitle, taskDescription, taskDate, category, active: false, newTask: true, failed: false, completed: false })
 
-    setTaskTitle('')
-    setCategory('')
-    setAsignTo('')
-    setTaskDate('')
-    setTaskDescription('')
+      const data = userData
 
-  }
+      data.forEach(function (elem) {
+          if (asignTo == elem.firstName) {
+              elem.tasks.push(newTask)
+              elem.taskCounts.newTask = elem.taskCounts.newTask + 1
+          }
+      })
+      setUserData(data)
+      console.log(data);
+
+      setTaskTitle('')
+      setCategory('')
+      setAsignTo('')
+      setTaskDate('')
+      setTaskDescription('')
+  };
+  
 
   return (
     <div className="max-w-4xl mx-auto py-8">
         <form onSubmit={(e)=>{
-          sumbitHandler(e);
+          submitHandler(e);
         }} className="bg-white shadow-lg rounded-lg p-8 space-y-6 border border-gray-200">
           <h2 className="text-2xl font-bold text-gray-700">Create a New Task</h2>
 
-          {/* Task Title */}
+        
           <div>
             <label className="block text-sm font-medium text-gray-600">Task Title</label>
             <input

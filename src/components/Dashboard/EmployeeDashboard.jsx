@@ -4,7 +4,7 @@ import Header from '../others/Header';
 import TaskList from '../TaskList/TaskList';
 
 const EmployeeDashboard = ({data}) => {
-  console.log(data)
+  
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center">
       {/* Header */}
