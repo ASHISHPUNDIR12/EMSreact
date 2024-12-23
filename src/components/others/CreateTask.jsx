@@ -1,15 +1,58 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../../context/AuthProvider'
 
 const CreateTask = () => {
+
+  const [userData, setUserData] = useContext(AuthContext)
+
+  const [taskTitle, setTaskTitle] = useState('')
+  const [taskDescription, setTaskDescription] = useState('')
+  const [taskDate, setTaskDate] = useState('')
+  const [asignTo, setAsignTo] = useState('')
+  const [category, setCategory] = useState('')
+
+  const [newTask, setNewTask] = useState({})
+   
+  const sumbitHandler = (e)=>{
+    e.preventDefault();
+    
+    setNewTask({ taskTitle, taskDescription, taskDate, category, active: false, newTask: true, failed: false, completed: false })
+
+    const data = userData
+
+    data.forEach(function (elem) {
+        if (asignTo == elem.firstName) {
+            elem.tasks.push(newTask)
+            console.log(elem)
+            elem.taskCounts.newTask = elem.taskCounts.newTask + 1
+        }
+    })
+    setUserData(data)
+
+    setTaskTitle('')
+    setCategory('')
+    setAsignTo('')
+    setTaskDate('')
+    setTaskDescription('')
+
+  }
+
   return (
     <div className="max-w-4xl mx-auto py-8">
-        <form className="bg-white shadow-lg rounded-lg p-8 space-y-6 border border-gray-200">
+        <form onSubmit={(e)=>{
+          sumbitHandler(e);
+        }} className="bg-white shadow-lg rounded-lg p-8 space-y-6 border border-gray-200">
           <h2 className="text-2xl font-bold text-gray-700">Create a New Task</h2>
 
           {/* Task Title */}
           <div>
             <label className="block text-sm font-medium text-gray-600">Task Title</label>
             <input
+
+            value={taskTitle}
+            onChange={(e) => {
+                setTaskTitle(e.target.value)
+            }}
               type="text"
               placeholder="Add task here"
               className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
@@ -20,6 +63,10 @@ const CreateTask = () => {
           <div>
             <label className="block text-sm font-medium text-gray-600">Description</label>
             <textarea
+            value={taskDescription}
+            onChange={(e) => {
+              setTaskDescription(e.target.value)
+          }} 
               placeholder="Write task details here..."
               cols="30"
               rows="4"
@@ -31,6 +78,10 @@ const CreateTask = () => {
           <div>
             <label className="block text-sm font-medium text-gray-600">Date</label>
             <input
+               value={taskDate}
+               onChange={(e) => {
+                   setTaskDate(e.target.value)
+               }}
               type="date"
               className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
             />
@@ -40,6 +91,10 @@ const CreateTask = () => {
           <div>
             <label className="block text-sm font-medium text-gray-600">Assign To</label>
             <input
+            value={asignTo}
+            onChange={(e) => {
+                setAsignTo(e.target.value)
+            }}
               type="text"
               placeholder="Enter assignee's name"
               className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
@@ -50,6 +105,10 @@ const CreateTask = () => {
           <div>
             <label className="block text-sm font-medium text-gray-600">Category</label>
             <input
+              value={category}
+              onChange={(e) => {
+                  setCategory(e.target.value)
+              }}
               type="text"
               placeholder="Enter category"
               className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
