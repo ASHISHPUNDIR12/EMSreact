@@ -9,34 +9,28 @@ import { AuthContext } from "./context/AuthProvider";
 
 const App = () => {
   const [LoginUserData, SetLoginUserData] = useState(null);
-  const AuthData = useContext(AuthContext);
+  const [userData,SetUserData] = useContext(AuthContext)
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    if (loggedInUser) {
-      try {
-        const userData = JSON.parse(loggedInUser);
-        console.log(userData);
-        if (userData.role) {
-          setUser(userData.role);
-        }
-        if (userData.data) {
-          SetLoginUserData(userData.data);
-        }
-      } catch (error) {
-        console.error("Error parsing loggedInUser data:", error);
-      }
+  
+  useEffect(()=>{
+    const loggedInUser = localStorage.getItem('loggedInUser')
+    
+    if(loggedInUser){
+      const userData = JSON.parse(loggedInUser)
+      setUser(userData.role)
+      SetLoginUserData(userData.data)
     }
-  }, []);
+
+  },[])
 
   const handleLogin = (email, password) => {
     if (email === "admin@example.com" && password === "123") {
       setUser("admin"); // Set user as a string, not an object
       localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
-    } else if (AuthData) {
-      const employee = AuthData.employeeData.find(
+    } else if (userData) {
+      const employee = userData.find(
         (e) => email === e.email && password === e.password
-      );
+      );  
       if (employee) {
         setUser("employee"); // Set user role as a string
         SetLoginUserData(employee);
