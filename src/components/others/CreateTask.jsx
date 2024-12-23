@@ -11,8 +11,6 @@ const CreateTask = () => {
   const [asignTo, setAsignTo] = useState('')
   const [category, setCategory] = useState('')
 
-  // const [newTask, setNewTask] = useState({})
-
   const submitHandler = (e) => {
     e.preventDefault();
   
@@ -33,8 +31,7 @@ const CreateTask = () => {
     });
   
     setUserData(updatedUserData);
-    console.log(updatedUserData);
-  
+
     setTaskTitle('');
     setCategory('');
     setAsignTo('');
@@ -43,7 +40,7 @@ const CreateTask = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-8">
+    <div className="max-w-4xl mx-auto py-8 px-4">
         <form onSubmit={(e)=>{
           submitHandler(e);
         }} className="bg-white shadow-lg rounded-lg p-8 space-y-6 border border-gray-200">

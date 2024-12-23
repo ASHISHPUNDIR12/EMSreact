@@ -3,11 +3,11 @@ import React from "react";
 const Header = (props) => {
   const UserLogOut = () => {
     localStorage.setItem("loggedInUser", "");
-    props.changeUser('')
-    // window.location.reload();
+    props.changeUser('');
   };
+
   return (
-    <div className="bg-blue-500 text-white p-4 flex items-center justify-between shadow-md w-full max-w-full mx-auto">
+    <div className="bg-blue-500 text-white p-4 flex items-center justify-between shadow-md w-full mx-auto">
       <h1 className="text-2xl font-bold">Hello sir</h1>
       <button
         onClick={UserLogOut}
