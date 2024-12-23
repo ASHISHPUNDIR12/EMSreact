@@ -18,14 +18,14 @@ const CreateTask = () => {
 
       setNewTask({ taskTitle, taskDescription, taskDate, category, active: false, newTask: true, failed: false, completed: false })
 
-      const data = userData
+      const data = userData;
 
       data.forEach(function (elem) {
           if (asignTo == elem.firstName) {
               elem.tasks.push(newTask)
-              elem.taskCounts.newTask = elem.taskCounts.newTask + 1
+              elem.taskCounts.newTask = elem.taskCounts.newTask + 1;
           }
-      })
+      });
       setUserData(data)
       console.log(data);
 
@@ -34,7 +34,7 @@ const CreateTask = () => {
       setAsignTo('')
       setTaskDate('')
       setTaskDescription('')
-  };
+      };
   
 
   return (
